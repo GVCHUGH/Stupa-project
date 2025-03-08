@@ -1,0 +1,54 @@
+<div class="row pagination-count m-0 me-3">
+  <div class="col-md-3 d-flex align-items-center page-drop px-1">
+    <mat-form-field
+      appearance="outline"
+      class="without-error-space"
+      style="width: 180px"
+    >
+      <mat-select
+        [(value)]="pageSize"
+        (selectionChange)="onPageSizeChange($event.value)"
+      >
+        <mat-option *ngFor="let size of [10, 20, 50, 100]" [value]="size">{{
+          size
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div
+    class="col-md-6 d-flex justify-content-center align-items-center page-numbers px-1"
+  >
+    <nav aria-label="Page navigation">
+      <ul class="pagination m-0">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)"
+            >Previous</a
+          >
+        </li>
+        <li
+          class="page-item"
+          *ngFor="let item of totalPage; let i = index"
+          [class.disabled]="currentPage === i + 1"
+        >
+          <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === lastPage">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div
+    class="col-md-3 d-flex flex-column justify-content-center align-items-end page-count px-1"
+  >
+    <span class="page-count--pages">
+      {{ currentPage }} of {{ totalPage.length }} Pages
+    </span>
+    <span class="page-count--record">
+      View {{ getStartPage() }} to {{ getLastPage() }} records out of
+      {{ getTotalRecord() }}
+    </span>
+  </div>
+</div>

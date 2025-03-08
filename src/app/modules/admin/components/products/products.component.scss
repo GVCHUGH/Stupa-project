@@ -1,0 +1,47 @@
+@import '../../../../../variables';
+.content{
+    width: calc(100vw - 35px);
+    margin: 10px;
+    border-radius: 10px;
+    &-title{
+        border-radius: 10px 10px 0 0;
+        height: 40px;
+        h2{
+            font-size: $text-lg;
+        }
+    }
+    &-body{
+        padding: 5px 0;
+        .table-responsive{
+            height: calc(100dvh - 215px);
+            overflow: auto;
+            &__shimmer{
+                height: calc(100dvh - 160px);
+            }
+            .table{
+                width: 450%;
+                @media (min-width: 480px){
+                    width: 320%;
+                }
+                @media (min-width: 576px){
+                    width: 260%;
+                }
+                @media (min-width: 768px){
+                    width: 200%;
+                }
+                @media (min-width: 991px){
+                    width: 150%;
+                }
+                @media (min-width: 1200px){
+                    width: 100%;
+                }
+            }
+        }
+        .read-more{
+            color: $primary;
+            font-size: $text-sm;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,59 @@
+@import '../../../../variables';
+
+.pagination-count{
+    .mat-mdc-form-field-subscript-wrapper{
+        display: none;
+    }
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+    .mat-mdc-form-field-infix{
+        height: 40px !important;
+        min-height: 40px;
+    }
+    .mat-mdc-text-field-wrapper{
+        width: 100%;
+        @media (min-width: 768px) {
+            width: 50%;
+        }
+    }
+}
+.pagination-count{
+    height: 45px;
+    margin-bottom: 10px !important;
+    .page-link{
+        color: $primary;
+        padding: 5px 10px !important;
+        cursor: pointer;
+    }
+    .page-item.active a{
+        background-color: $primary;
+        color: $light;
+        border-color: $primary;
+    }
+    .page-item.disabled a{
+        color: #c7c7c7 !important;
+        background-color: #eee;
+        cursor: no-drop !important;
+        pointer-events: all;
+    }
+}
+.page-drop{
+    @media (max-width: 576px){
+        display: none !important;
+    }
+}
+.page-count{
+    @media (max-width: 576px){
+        display: none !important;
+    }
+    &--pages{
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+    &--record{
+        color: #8c8c8c;
+        font-size: 0.75rem;
+    }
+}

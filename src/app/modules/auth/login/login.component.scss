@@ -1,0 +1,133 @@
+@import '../../../../variables';
+.login{
+    width: 100%;
+    height: 100%;
+    &-page{
+        background-color: $primary;
+        width: 100%;
+        height: 100%;
+        .row{
+            @media (min-width: 1200px){
+                padding: 0 0px 0 30px !important; 
+            }
+        }
+    }
+    &-header{
+        padding: 10px 0 0 20px;
+        height: 70px;
+        position: fixed;
+        img{
+            width: 100px;
+            height: 60px;
+        }
+    }
+    &-slider{
+        @media (max-width: 992px){
+            display: none !important;
+        }
+        h2{
+            color: $light;
+            font-size: $text-3xl;
+            margin-bottom: 0px;
+            font-weight: 600;
+        }
+        p{
+            color: $light;
+            margin-bottom: 0;
+            font-size: $text-lg;
+            width: 80%;
+            font-weight: 400;
+        }
+    }
+    &-form--section{
+        @media (max-width: 992px){
+            width: 100%;
+        }
+    }
+    &-form{
+        background-color: $light;
+        border-radius: 10px;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 -3px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 480px;
+        @media (max-width: 768px){
+            padding: 20px;
+        }
+        p{
+            color: #031B4E;
+            font-size: $text-sm;
+            text-align: center;
+            a{
+                color: $primary;
+                text-decoration: none;
+            }
+        }
+        h2{
+            font-size: $text-2xl;
+            color: $primary ;
+            font-weight: 700;
+            margin-bottom: 25px;
+            @media (max-width: 768px){
+                font-size: $text-xl;
+            }
+        }
+        .label{
+            font-size: $text-sm;
+            color: #031B4E;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .inp-field{
+            border: 1px solid #ECECEC;
+            background-color: #FBFBFB;
+            padding: 3px 20px;
+            border-radius: 5px;
+            position: relative;
+            i{
+                color: $primary;
+                cursor: pointer;
+            }
+        }
+        img{
+            width: 20px;
+            height: 20px;
+        }
+        .form-control{
+            border: none;
+            font-size: $text-sm;
+            &:focus{
+                box-shadow: none;
+            }
+        }
+        .forgot{
+            a{
+                color: $primary;
+                text-decoration: none;
+                font-size: $text-xs;
+                @media (min-width: 480px){
+                    font-size: $text-sm;
+                }
+            }
+        }
+        .btn-primary{
+            margin: 15px 0;
+            @media (max-width:480px){
+                width: 100%;
+            }
+        }
+    }
+}
+
+.warning-msg{
+    right: 0;
+    bottom: -17px;
+}
+.remember{
+    label{
+        font-size: $text-xs !important;
+        @media (min-width: 480px){
+            font-size: $text-sm !important;
+        }
+    }
+}

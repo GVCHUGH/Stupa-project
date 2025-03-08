@@ -1,0 +1,21 @@
+@import '../variables';
+.header{
+    background-color: $primary;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9;
+}
+.main{
+    height: calc(100dvh - 60px);
+    padding-top: 60px;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    height: 35px;
+    box-shadow: 0 -2px 4px #00000020;
+    width: 100%;
+}

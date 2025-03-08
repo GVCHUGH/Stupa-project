@@ -1,0 +1,149 @@
+<div class="popup">
+  <div class="popup-header d-flex justify-content-between">
+    <h5>{{ isEdit ? "Update" : "Add" }} Product</h5>
+    <i class="fa-solid fa-xmark pointer" (click)="toClose()"></i>
+  </div>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="popup-body">
+      <div class="row">
+        <div class="col-md-6 px-1">
+          <div class="inp-field position-relative">
+            <label class="label mt-0">Title</label>
+            <span class="text-danger m-0">*</span>
+            <input type="text" formControlName="title" class="form-control" />
+            <div
+              *ngIf="
+                productForm.get('title')?.invalid &&
+                productForm.get('title')?.touched
+              "
+              class="text-danger error-msg position-absolute"
+            >
+              <span
+                *ngIf="productForm.get('title')?.errors?.['required']"
+              ></span>
+              Title is required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 px-1">
+          <div class="inp-field position-relative">
+            <label class="label mt-0">Price</label>
+            <span class="text-danger m-0">*</span>
+            <input type="number" formControlName="price" class="form-control" />
+            <div
+              *ngIf="
+                productForm.get('price')?.invalid &&
+                productForm.get('price')?.touched
+              "
+              class="text-danger error-msg position-absolute"
+            >
+              <span *ngIf="productForm.get('price')?.errors?.['required']">
+                Price is required and must be a number
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 px-1 my-2">
+          <div class="inp-field position-relative">
+            <label for="" class="label">Description</label>
+            <span class="text-danger m-0">*</span>
+            <textarea
+              class="form-control"
+              formControlName="description"
+              rows="4"
+            ></textarea>
+            <div
+              *ngIf="
+                productForm.get('description')?.invalid &&
+                productForm.get('description')?.touched
+              "
+              class="text-danger error-msg position-absolute"
+            >
+              <span *ngIf="productForm.get('description')?.errors?.['required']"
+                >Description is required</span
+              >
+              <span
+                *ngIf="productForm.get('description')?.errors?.['minlength'] && !productForm.get('description')?.errors?.['required']"
+                >min length 50</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 px-1">
+          <div class="inp-field position-relative">
+            <label class="label mt-0">Category</label>
+            <span class="text-danger m-0">*</span>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="categoryId">
+                <mat-option [value]="1">Clothes</mat-option>
+                <mat-option [value]="2">Electronics</mat-option>
+                <mat-option [value]="3">Furniture</mat-option>
+                <mat-option [value]="4">Shoes</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="
+                productForm.get('categoryId')?.invalid &&
+                productForm.get('categoryId')?.touched
+              "
+              class="text-danger error-msg position-absolute"
+            >
+              <span *ngIf="productForm.get('categoryId')?.errors?.['required']">
+                Category is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Image Upload -->
+        <div class="col-md-12 px-1" formArrayName="images">
+          <label class="label mt-1">Images</label>
+          <span class="text-danger m-0">*</span>
+          <div
+            class="d-flex gap-2"
+            *ngFor="let item of images.controls; let i = index"
+          >
+            <input type="text" class="form-control" [formControlName]="i" />
+            <!-- <input
+                type="file"
+                (change)="onFileChange($event, i)"
+                class="form-control"
+              /> -->
+            <button
+              class="btn btn-add btn-danger mb-2"
+              (click)="toRemoveImage(i)"
+              type="button"
+              *ngIf="i !== 0 || images.controls.length > 1"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <button
+              class="btn btn-add btn-primary"
+              (click)="toAddImage()"
+              type="button"
+              *ngIf="i + 1 == images.controls.length"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-wrapper btn-wrapper--popup justify-content-end mt-1 gap-2">
+      <button class="btn btn-secondary" type="button" (click)="toClose()">
+        Dismiss
+      </button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="productForm.invalid"
+      >
+        {{ isEdit ? "Update" : "Add" }}
+      </button>
+    </div>
+  </form>
+</div>

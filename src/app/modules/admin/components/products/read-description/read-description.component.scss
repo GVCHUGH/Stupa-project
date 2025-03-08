@@ -1,0 +1,55 @@
+@import '../../../../../../variables';
+
+.popup{
+    padding-bottom: 20px !important;
+    width: 292px;
+    @media (min-width:360px){
+        width: 335px;
+    }
+    @media (min-width:480px){
+        width: 384px;
+    }
+    @media (min-width:576px){
+        width: 450px;
+    }
+    &-header{
+        min-height: 80px;
+        padding: 20px !important;
+        background-color: $primary;
+        color: $light;
+        flex-shrink: 0;
+        h5{
+            font-size: $text-base;
+            word-break: break-word;
+            word-wrap: break-word;
+            margin-right: 15px;
+        }
+        i{
+            background-color: $light;
+            color: #3D546E;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            display: grid;
+            flex-shrink: 0;
+            place-items:center;
+        }
+    }
+    &-body{
+        max-height: 310px;
+        overflow-y: auto;
+        width: calc(100% - 40px);
+        margin: -20px auto 0;
+        padding: 15px !important;
+        background-color: $light;
+        border-radius: 10px;
+        box-shadow: 0px 2px 2px rgba(170, 169, 169, 0.4);
+        p{
+            word-break: break-all;
+            font-size: $text-sm;
+        }
+    }
+}
+.pointer{
+    cursor: pointer;
+}

@@ -1,0 +1,61 @@
+<div class="popup">
+  <div
+    class="popup-header d-flex justify-content-between align-items-center px-3"
+  >
+    <h4 class="m-0">Product Deatil</h4>
+    <i class="fa-solid fa-xmark pointer" (click)="onClose()"></i>
+  </div>
+  <div class="popup-body p-3 d-md-flex gap-2">
+    <div class="popup-body__wrapper">
+      <div class="popup-body__wrapper--show">
+        <img [src]="data.images[selectedImage]" alt="" />
+      </div>
+      <div class="popup-body__wrapper--queue d-flex gap-2 mt-2">
+        <img
+          [src]="image"
+          alt=""
+          *ngFor="let image of data.images; let i = index"
+          (click)="toChangeImage(i)"
+        />
+      </div>
+    </div>
+    <div class="popup-body__content">
+      <h4 class="title m-0">{{ data.title }}</h4>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="price m-0 my-3">
+          <i class="fa-solid fa-indian-rupee-sign me-2"></i>{{ data.price }}
+        </h2>
+        <div class="d-flex justify-content-start">
+          <div
+            class="btn btn-primary d-flex justify-content-center align-items-center"
+            *ngIf="getProductQuantity(data.id) === 0"
+            (click)="addToCart(data, $event)"
+          >
+            <span>Add</span>
+          </div>
+          <div
+            class="add-btn d-flex justify-content-center align-items-center gap-2"
+            *ngIf="getProductQuantity(data.id) !== 0"
+          >
+            <div class="quantity-control d-flex gap-2 align-items-center">
+              <button
+                class="btn btn-primary"
+                (click)="decreaseQuantity(data, $event)"
+              >
+                -
+              </button>
+              <span>{{ getProductQuantity(data.id) }}</span>
+              <button
+                class="btn btn-primary"
+                (click)="increaseQuantity(data, $event)"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="description m-0 mt-2">{{ data.description }}</p>
+    </div>
+  </div>
+</div>

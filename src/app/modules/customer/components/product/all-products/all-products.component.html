@@ -1,0 +1,218 @@
+<div class="cart-icon position-relative pointer" (click)="toViewCart()">
+  <i class="fa-solid fa-cart-shopping"></i>
+  <span class="position-absolute">{{ cartCount }}</span>
+</div>
+<div class="dark-screen" *ngIf="viewCart"></div>
+<div class="view-cart" [ngClass]="viewCart ? 'view-cart__show' : ''">
+  <div
+    class="view-cart__header d-flex align-items-center justify-content-between"
+  >
+    <h4 class="m-0">My Cart</h4>
+    <i class="fa-solid fa-xmark pointer" (click)="toViewCart()"></i>
+  </div>
+  <div class="view-cart__body d-flex flex-column gap-2">
+    <div class="view-cart__body--item d-flex gap-2" *ngFor="let item of cart">
+      <div class="product-image">
+        <img [src]="item.images[0]" alt="" />
+      </div>
+      <div class="d-md-flex justify-content-between w-100">
+        <div class="product-detail">
+          <h2 class="m-0">
+            {{ item.title }}
+          </h2>
+          <div class="d-flex justify-content-between gap-2 mt-1">
+            <p>
+              {{ item.category.name }}
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary" (click)="decreaseQuantity(item)">
+                -
+              </button>
+              {{ item.quantity }}
+              <button class="btn btn-primary" (click)="increaseQuantity(item)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-total d-flex flex-md-column align-items-end">
+          <span>
+            <i class="fa-solid fa-indian-rupee-sign me-2"></i>{{ item.price }}
+          </span>
+          <span class="ms-1"> * {{ item.quantity }} </span>
+          <span> = {{ item.price * item.quantity }} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="view-cart__footer d-flex align-items-center justify-content-between"
+  >
+    <p class="total m-0">
+      <span>Total Price :</span>
+      <i class="fa-solid fa-indian-rupee-sign mx-2"></i>{{ getTotalAmount() }}
+    </p>
+    <button class="btn btn-primary" (click)="clearCart()">Checkout</button>
+  </div>
+</div>
+<div class="d-flex">
+  <div class="category-area">
+    <ul class="nav flex-column">
+      <li
+        class="nav-list d-flex align-items-center p-2 position-relative gap-3 ps-3"
+        *ngFor="let item of categoryList; let i = index"
+        [ngClass]="selectedCategoryIndex == i ? 'active' : ''"
+        (click)="toSelectCategory(i, item.name)"
+      >
+        <img *ngIf="item.image" [src]="item.image" alt="" />
+        <i *ngIf="!item.image" class="fa-solid fa-house"></i>
+        <span>{{ item.name }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content-area">
+    <div class="container-fluid">
+      <div class="row filter-section">
+        <div
+          class="col-md-12 mt-3 d-flex gap-2 justify-content-between align-items-center"
+        >
+          <div class="d-flex gap-2">
+            <div class="filter-field position-relative">
+              <mat-form-field appearance="outline">
+                <mat-select
+                  [formControl]="sortControl"
+                  (selectionChange)="filterPrice($event)"
+                  placeholder="Sort By"
+                >
+                  <mat-option value="LtH">Low to High</mat-option>
+                  <mat-option value="HtL">High to Low</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <i
+                class="fa-solid fa-xmark reset-btn position-absolute pointer"
+                (click)="resetSort()"
+                *ngIf="appliedSorting"
+              ></i>
+            </div>
+            <div class="filter-field">
+              <span
+                class="filter-field__chip"
+                (click)="toFilterLikedProducts()"
+                [ngClass]="likeFilter ? 'filter-field__chip-active' : ''"
+              >
+                <!-- Like Products -->
+                <i class="fa-regular fa-heart"></i>
+              </span>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <div class="filter-field">
+              <div class="inp-icon d-flex align-items-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="searchText"
+                  (input)="filterProduct()"
+                  placeholder="Search By Title"
+                />
+                <div
+                  class="icon d-flex justify-content-center align-items-center"
+                  (click)="clearFilter()"
+                  *ngIf="isFilteredData"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row content-area__scroll">
+        <div
+          class="mobile-title mt-2 d-flex align-items-center justify-content-center"
+        >
+          <p class="m-0">{{ selectedMenu }}</p>
+        </div>
+        <div
+          class="col-sm-6 col-lg-4 col-xl-3 my-2 px-2"
+          *ngFor="let item of filteredProducts; let i = index"
+        >
+          <div class="content-area__card" (click)="toDetailPage(item)">
+            <div class="content-area__card--wrapper">
+              <ng-container *ngFor="let image of item.images; let i = index">
+                <img [src]="image" *ngIf="i == 0" loading="lazy" />
+              </ng-container>
+              <div
+                class="heart d-flex justify-content-center align-items-center"
+              >
+                <i
+                  class="fa-regular fa-heart"
+                  *ngIf="!isLiked(item)"
+                  (click)="toLike(item, $event)"
+                ></i>
+                <i
+                  class="fa-solid fa-heart"
+                  *ngIf="isLiked(item)"
+                  (click)="toLike(item, $event)"
+                ></i>
+              </div>
+            </div>
+            <div class="content-area__card--body">
+              <div
+                class="content-area__card--body__title d-flex justify-content-between align-items-center"
+              >
+                <h4 class="m-0">{{ item.title }}</h4>
+              </div>
+              <div class="content-area__card--body__description">
+                <p class="m-0">{{ item.description }}</p>
+              </div>
+              <div
+                class="content-area__card--body__footer d-flex align-items-center"
+              >
+                <span class="price-chip">{{ item.price }} /-</span>
+                <div
+                  class="add-btn d-flex justify-content-center align-items-center"
+                  *ngIf="getProductQuantity(item.id) === 0"
+                  (click)="addToCart(item, $event)"
+                >
+                  <span>Add</span>
+                </div>
+                <div
+                  class="add-btn d-flex justify-content-center align-items-center gap-2"
+                  *ngIf="getProductQuantity(item.id) !== 0"
+                >
+                  <div class="quantity-control d-flex gap-2 align-items-center">
+                    <button
+                      class="btn"
+                      (click)="decreaseQuantity(item, $event)"
+                    >
+                      -
+                    </button>
+                    <span>{{ getProductQuantity(item.id) }}</span>
+                    <button
+                      class="btn"
+                      (click)="increaseQuantity(item, $event)"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-12"
+          *ngIf="
+            (likeFilter && filteredProducts.length == 0) ||
+            !filteredProducts.length
+          "
+        >
+          <div class="no-data d-flex justify-content-center align-items-center">
+            No Liked Product Found
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

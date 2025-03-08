@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between">
+  <div class="logo">
+    <img src="../../../../assets/images/stupalogo.png" alt="" />
+  </div>
+  <div class="d-flex gap-2">
+    <ul class="nav m-0 gap-3">
+      <li
+        class="nav-list d-flex align-items-center pointer"
+        (click)="toChangeUser('Customer')"
+        [ngClass]="isAdmin ? '' : 'active'"
+      >
+        <span>Customer</span>
+      </li>
+      <li
+        class="nav-list d-flex align-items-center pointer"
+        (click)="toChangeUser('Admin')"
+        [ngClass]="isAdmin ? 'active' : ''"
+      >
+        <span>Admin</span>
+      </li>
+    </ul>
+  </div>
+  <div class="user-btn d-flex align-items-center gap-2">
+    <button
+      class="btn d-flex align-items-center gap-2"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
+      <div class="user-img d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <span> Gaurav Chugh </span>
+      <i class="fa-solid fa-angle-down"></i>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        class="mobile-btn"
+        (click)="toChangeUser('Admin')"
+        *ngIf="!isAdmin"
+      >
+        Admin
+      </button>
+      <button
+        mat-menu-item
+        class="mobile-btn"
+        (click)="toChangeUser('Customer')"
+        *ngIf="isAdmin"
+      >
+        Customer
+      </button>
+      <button mat-menu-item disabled>Profile</button>
+      <button mat-menu-item (click)="toLogout()">Logout</button>
+    </mat-menu>
+  </div>
+</div>

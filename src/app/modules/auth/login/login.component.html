@@ -1,0 +1,134 @@
+<div class="login">
+  <div class="login-page">
+    <div class="container-fluid h-100">
+      <form class="h-100" [formGroup]="loginForm">
+        <div class="row m-0 h-100">
+          <div class="col-md-12 login-header">
+            <img src="../../../../assets/images/stupalogo.png" alt="" />
+          </div>
+          <div
+            class="col-md-6 login-slider d-flex align-items-center justify-content-center h-100"
+          >
+            <div class="login-slider d-flex flex-column">
+              <h2>Welcome to STUPA</h2>
+              <p>
+                Where innovation meets athleticism. At Stupa, we are at the
+                forefront of revolutionising sports through cutting-edge
+                technologies, particularly artificial intelligence and
+                digitization
+              </p>
+            </div>
+          </div>
+          <div
+            class="col-md-6 p-0 login-form--section d-flex align-items-center justify-content-center"
+          >
+            <div class="login-form">
+              <div class="d-flex flex-column">
+                <h2>Login</h2>
+              </div>
+              <div class="inp-area position-relative">
+                <label class="label">Email</label>
+                <div class="inp-field d-flex align-items-center mb-3">
+                  <img src="../../../../assets/images/email.svg" alt="" />
+                  <input
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    placeholder="Email"
+                    minlength="4"
+                    maxlength="50"
+                  />
+                </div>
+                <mat-error
+                  class="warning-msg"
+                  *ngIf="
+                    getLoginFormControls('email')?.invalid &&
+                    getLoginFormControls('email')?.touched
+                  "
+                >
+                  <ng-container
+                    *ngIf="getLoginFormControls('email')?.hasError('required')"
+                  >
+                    required
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
+                      getLoginFormControls('email')?.hasError('email') &&
+                      !getLoginFormControls('email')?.hasError('required')
+                    "
+                  >
+                    Enter correct email
+                  </ng-container>
+                </mat-error>
+              </div>
+              <div class="inp-area position-relative">
+                <label class="label">Password</label>
+                <div class="inp-field d-flex align-items-center mb-2">
+                  <img src="../../../../assets/images/lock.svg" alt="" />
+                  <input
+                    formControlName="password"
+                    [type]="hide ? 'password' : 'text'"
+                    class="form-control"
+                    placeholder="Password"
+                    minlength="6"
+                    maxlength="10"
+                  />
+                  <i
+                    class="fa-regular fa-eye-slash password-eye"
+                    [ngClass]="
+                      hide ? 'fa-eye-slash password-eye' : 'fa-eye password-eye'
+                    "
+                    (click)="hide = !hide"
+                  ></i>
+                </div>
+                <mat-error
+                  class="warning-msg"
+                  *ngIf="
+                    getLoginFormControls('password')?.invalid &&
+                    getLoginFormControls('password')?.touched
+                  "
+                >
+                  <ng-container
+                    *ngIf="
+                      getLoginFormControls('password')?.hasError('required')
+                    "
+                  >
+                    required
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
+                      getLoginFormControls('password')?.hasError('minlength') &&
+                      !getLoginFormControls('password')?.hasError('required')
+                    "
+                  >
+                    min 6 characters required
+                  </ng-container>
+                </mat-error>
+              </div>
+              <div class="d-flex justify-content-between my-3">
+                <div
+                  class="remember d-flex align-items-center justify-content-center justify-content-md-start"
+                >
+                  <input type="checkbox" id="remeberMe" />
+                  <label class="label m-0 ms-1 fw-normal" for="remeberMe"
+                    >Remember Me?</label
+                  >
+                </div>
+                <div
+                  class="forgot d-flex justify-content-center justify-content-md-start"
+                >
+                  <a routerLink="/forgot-password">Forgot password ?</a>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button (click)="toLogin()" class="btn btn-primary mb-0">
+                  Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

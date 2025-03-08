@@ -1,0 +1,56 @@
+// Angular Material Common Code Starts here
+.mat-mdc-form-field{
+    width: 100%;
+    background-color: $light;
+    .mat-mdc-text-field-wrapper{
+        height: 40px;
+    }
+    .mat-mdc-form-field-infix{
+        padding: 8px 0 !important;
+    }
+    .mdc-floating-label{
+        top: 20px !important;
+    }
+    .mat-mdc-form-field-subscript-wrapper{
+        display: none;
+    }
+}
+.mat-form-field-disabled{
+    background-color: #dbdbdb !important;
+    border-radius: 5px;
+    cursor: no-drop;
+}
+// Angular Material Common Code ends here
+
+// Start Mat Select
+.mdc-notched-outline__trailing{
+    border: 1px solid #dee2e6 !important;
+    border-left: none !important;
+}
+.mdc-notched-outline__leading{
+    border: 1px solid #dee2e6 !important;
+    border-right: none !important;
+}
+.mat-mdc-select-panel{
+    padding: 0 !important;
+    .mdc-list-item__primary-text{
+        font-size: 0.875rem !important;
+    }
+    .mdc-list-item--selected{
+        .mdc-list-item__primary-text{
+            color: $primary !important;
+        }
+    }
+    .mat-pseudo-checkbox-minimal{
+        &::after{
+            color: $primary !important;
+        }
+    }
+}
+.mat-mdc-option-multiple{
+    .mat-pseudo-checkbox-checked{
+        background-color: $primary !important;
+        color: $light !important;
+    }
+}
+// End Mat Select

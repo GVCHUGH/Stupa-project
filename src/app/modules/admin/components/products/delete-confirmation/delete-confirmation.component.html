@@ -1,0 +1,19 @@
+<div class="popup">
+  <div class="icon d-flex justify-content-center align-items-center">
+    <img src="../../../../../../assets/images/delete-img.svg" alt="" />
+  </div>
+  <h2>Want to Delete ?</h2>
+  <p>
+    Are you sure to delete the
+    <span style="font-weight: 600">{{ data }}</span> ?
+  </p>
+  <p>You will <span>not be able to recover</span> them.</p>
+  <div class="d-flex mt-4 justify-content-end" style="gap: 20px">
+    <button class="btn btn-secondary" (click)="toClose()" type="button">
+      Dismiss
+    </button>
+    <button class="btn btn-primary" type="submit" (click)="toDelete()">
+      Delete
+    </button>
+  </div>
+</div>

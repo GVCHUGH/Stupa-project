@@ -1,0 +1,237 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'variables';
+@import 'material';
+@import 'ngx-toastr/toastr';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: $font; }
+
+.btn {
+    &-primary {
+        background-color: $primary;
+        border-color: $primary;
+        &:hover, &:active{
+            background-color: darken($color: $primary, $amount: 5) !important;
+            border-color: $primary !important;
+        }
+        &:disabled{
+            background-color: lighten($color: $primary, $amount: 10) !important;
+            border-color: lighten($color: $primary, $amount: 10) !important;
+            cursor: no-drop !important;
+            pointer-events: all;
+        }
+        &:focus-visible{
+            background-color: darken($color: $primary, $amount: 5) !important;
+            border-color: $primary !important;
+            box-shadow: none;
+        }
+    }
+    &-secondary {
+        background-color: transparent;
+        border-color: $primary;
+        color: $primary;
+        &:hover, &:active{
+            background-color: darken($color: $primary, $amount: 2) !important;
+            border-color: $primary !important;
+        }
+        &:disabled{
+            background-color: lighten($color: $primary, $amount: 10) !important;
+            border-color: lighten($color: $primary, $amount: 10) !important;
+            cursor: no-drop !important;
+            pointer-events: all;
+        }
+        &:focus-visible{
+            background-color: darken($color: $primary, $amount: 5) !important;
+            border-color: $primary !important;
+            box-shadow: none;
+        }
+    }
+}
+.warning-msg{
+    position: absolute;
+    font-size: 0.8rem;
+    right: 15px;
+    color: $danger;
+}
+.mat-mdc-menu-content{
+    width: 195px !important;
+    padding: 0 !important;
+}
+
+.mat-mdc-menu-item{
+    &:not(:last-child){
+        border-bottom: 1px solid !important;
+        border-bottom-color: lighten($color: $primary, $amount: 60) !important;
+    }
+    &:hover{
+        background-color: lighten($color: $primary, $amount: 60) !important;
+    }
+    &:last-child{
+        color: $danger !important;
+    }
+    .mat-mdc-menu-item-text{
+        font-size: 0.875rem !important;
+    }
+}
+.filter-field{
+    &__chip{
+        padding: 0px 15px;
+        border-radius: 5px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.875rem;     
+        border: 1px solid $primary; 
+        cursor: pointer; 
+        &-active{
+            background-color: $primary;
+            color: $light;
+        } 
+    }
+    .mat-mdc-text-field-wrapper{
+        height: 40px;
+    }
+    .mat-mdc-form-field-infix{
+        padding: 7px 0 !important;
+    }
+}
+.form-control{
+    height: 40px;
+    font-size: $text-sm;
+    &:focus{
+        box-shadow: none;
+    }
+}
+.inp-icon{
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    input{
+        border: none;
+        border-radius: 5px 0 0 5px;
+        &:focus{
+            box-shadow: none;
+        }
+    }
+    .icon{
+        background-color: #e2e2e2;
+        border-radius: 0 5px 5px 0;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+    }
+}
+.no-data{
+    height: calc(100dvh - 155px);
+}
+.pointer{
+    cursor: pointer;
+}
+
+.table {
+    background-color: $light;
+    border: 1px solid #eee;
+    border-top: 0px;
+    thead {
+        position: sticky;
+        top: 0;
+        tr {
+            th {
+            background-color: $primary;
+            color: $light;
+            font-size: $text-sm;
+            font-weight: 600;
+            padding: 10px;
+            &:first-child {
+                border-radius: 10px 0 0 0;
+            }
+            &:last-child {
+                border-radius: 0 10px 0 0;
+            }
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                padding: 10px;
+                vertical-align: middle;
+                word-break: break-word;
+                color: #657c96;
+                font-size: $text-sm;
+            }
+            &:nth-child(odd) {
+                td {
+                    background-color: lighten($color: $primary, $amount: 66);
+                }
+            }
+        }
+    }
+}
+.btn {
+    &-sm {
+        width: 25px;
+        height: 25px;
+        transition: all ease-in-out 0.5s;
+        display: grid;
+        place-items: center;
+        &--view {
+            color: $primary !important;
+            &:hover {
+                color: $primary;
+            }
+        }
+        &--edit {
+            color: $primary !important;
+            &:hover {
+                color: $primary;
+            }
+        }
+        &--delete {
+            color: $danger !important;
+            &:hover {
+                color: $danger;
+            }
+        }
+        &:active{
+            border-color: transparent !important;
+        }
+    }
+}
+.mat-mdc-menu-item{
+    &:disabled{
+        cursor: no-drop !important;
+    }
+}
+.mdc-text-field--disabled{
+    .mat-mdc-form-field-flex{
+        background-color: #e9ecef;
+    }
+}
+.shimmer-line {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 15px !important;
+    display: inline-block !important;
+    background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+  
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+.mobile-btn{
+    @media (min-width: 768px) {
+        display: none !important;
+    }
+}
+.cdk-overlay-pane {
+    max-width: 100vw !important;
+}

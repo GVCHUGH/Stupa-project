@@ -1,0 +1,110 @@
+<div class="content">
+  <div class="content-title d-flex align-items-center justify-content-between">
+    <h2 class="m-0">List of Products</h2>
+    <button class="btn btn-primary" (click)="toAdd()">Add Product</button>
+  </div>
+  <div class="content-body">
+    <app-pagination
+      [totalproducts]="totalProducts"
+      (pageChange)="onPageChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+      [hidden]="isLoading"
+    ></app-pagination>
+    <div
+      class="table-responsive"
+      [ngClass]="isLoading ? 'table-responsive__shimmer' : ''"
+    >
+      <table class="table m-0">
+        <thead>
+          <tr>
+            <th style="width: 5%">Sr No</th>
+            <th style="width: 25%">Title</th>
+            <th style="width: 30%">Description</th>
+            <th style="width: 15%">Price</th>
+            <th style="width: 15%">Category</th>
+            <th style="width: 10%">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="isLoading">
+          <tr *ngFor="let item of [].constructor(14)">
+            <td><span class="shimmer-line"></span></td>
+            <td><span class="shimmer-line"></span></td>
+            <td><span class="shimmer-line"></span></td>
+            <td><span class="shimmer-line"></span></td>
+            <td><span class="shimmer-line"></span></td>
+            <td>
+              <div class="d-flex gap-2">
+                <span
+                  class="shimmer-line"
+                  style="
+                    width: 20px !important;
+                    height: 20px;
+                    padding: 0 !important;
+                  "
+                ></span>
+                <span
+                  class="shimmer-line"
+                  style="
+                    width: 20px !important;
+                    height: 20px;
+                    padding: 0 !important;
+                  "
+                ></span>
+                <span
+                  class="shimmer-line"
+                  style="
+                    width: 20px !important;
+                    height: 20px;
+                    padding: 0 !important;
+                  "
+                ></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!isLoading">
+          <tr *ngFor="let item of productList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+              {{
+                item.description.length > 40
+                  ? item.description.substring(0, 40) + "..."
+                  : item.description
+              }}
+              <span
+                class="read-more"
+                *ngIf="item.description.length > 40"
+                (click)="readMore(item)"
+                >Read More</span
+              >
+            </td>
+            <td>
+              <i class="fa-solid fa-indian-rupee-sign me-2"></i>{{ item.price }}
+            </td>
+            <td>{{ item.category.name }}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-sm--view">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-sm--edit"
+                  (click)="toUpdate(item)"
+                >
+                  <i class="fa-solid fa-edit"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-sm--delete"
+                  (click)="toDelete(item)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

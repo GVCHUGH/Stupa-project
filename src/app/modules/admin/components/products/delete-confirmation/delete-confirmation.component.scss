@@ -1,0 +1,36 @@
+@import '../../../../../../variables';
+.popup{
+    width: 292px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px !important;
+    @media (min-width:360px){
+        width: 335px;
+    }
+    @media (min-width:480px){
+        width: 384px;
+    }
+    @media (min-width:576px){
+        width: 450px;
+    }
+    .icon{
+        width: 150px;
+        height: 150px;
+        background-color: lighten($color: $primary, $amount: 65);
+        border-radius: 50%;
+    }
+    h2{
+        color: #3D546E;
+        font-size: $text-xl;
+        margin-top: 20px;
+    }
+    p{
+        text-align: center;
+        margin: 0;
+        font-size:$text-base;
+    }
+    span{
+        color: $primary;
+    }
+}
